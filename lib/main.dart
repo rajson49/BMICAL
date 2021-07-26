@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: BmlCal(),
       theme: ThemeData.dark(),
     );
@@ -92,17 +93,24 @@ class _BmlCalState extends State<BmlCal> {
                 ],
                 textBaseline: TextBaseline.alphabetic,
               ),
-              Slider(
-                  value: height.toDouble(),
-                  min: 120,
-                  max: 220,
-                  inactiveColor: Colors.white,
-                  activeColor: kcolorActive,
-                  onChanged: (double value) {
-                    setState(() {
-                      height=value.round();
-                    });
-                  },)
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  inactiveTrackColor: Colors.white,
+                  activeTrackColor:Colors.blue,
+                  thumbColor: Colors.lightBlue,
+                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                  overlayShape: RoundSliderOverlayShape(overlayRadius: 30)
+                ),
+                child: Slider(
+                    value: height.toDouble(),
+                    min: 120,
+                    max: 220,
+                    onChanged: (double value) {
+                      setState(() {
+                        height=value.round();
+                      });
+                    },),
+              )
             ],
           ),
           colorChosed: kcolorInactive,
