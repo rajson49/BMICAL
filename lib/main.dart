@@ -1,10 +1,9 @@
+
 import 'package:bmicalculator/itemWidget.dart';
 import 'package:bmicalculator/reusableClass.dart';
 import 'package:flutter/material.dart';
+import 'constantsFile.dart';
 
-const Color colorOfBox = Colors.black45;
-const Color colorInactive = Colors.grey;
-const Color colorActive = Colors.lightBlue;
 
 void main() {
   runApp(MyApp());
@@ -34,9 +33,10 @@ class BmlCal extends StatefulWidget {
 
 class _BmlCalState extends State<BmlCal> {
 
-  Color maleBoxColor = colorInactive;
-  Color womanBoxColor = colorInactive;
+  Color maleBoxColor = kcolorInactive;
+  Color womanBoxColor = kcolorInactive;
   var selectedGender;
+  var height=124;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +46,7 @@ class _BmlCalState extends State<BmlCal> {
         title: Text('BMICAL'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Row(
@@ -59,7 +60,7 @@ class _BmlCalState extends State<BmlCal> {
                       },
                       child: ReusbaleClass(
                   child_widget: ItemWidget(icon: Icons.male, name: 'Male'),
-                  colorChosed: selectedGender==Gender.male?colorActive:colorInactive
+                  colorChosed: selectedGender==Gender.male?kcolorActive:kcolorInactive
                 ),
                     )),
                 Expanded(
@@ -71,14 +72,42 @@ class _BmlCalState extends State<BmlCal> {
                       },
                       child: ReusbaleClass(
                   child_widget: ItemWidget(icon: Icons.female, name: 'Female'),
-                  colorChosed:selectedGender==Gender.female?colorActive:colorInactive
+                  colorChosed:selectedGender==Gender.female?kcolorActive:kcolorInactive
                 ),
                     ))
               ],
             ),
           ),
-          /*Expanded(child: ReusbaleClass()),
-          Expanded(
+        Expanded(child: ReusbaleClass(
+          child_widget: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Height',style: klableDesign),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                children: [
+                  Text(height.toString(),style: kbiglableDesign),
+                  Text('cm',style: klableDesign)
+                ],
+                textBaseline: TextBaseline.alphabetic,
+              ),
+              Slider(
+                  value: height.toDouble(),
+                  min: 120,
+                  max: 220,
+                  inactiveColor: Colors.white,
+                  activeColor: kcolorActive,
+                  onChanged: (double value) {
+                    setState(() {
+                      height=value.round();
+                    });
+                  },)
+            ],
+          ),
+          colorChosed: kcolorInactive,
+        )),
+          /* Expanded(
             child: Row(
               children: [
                 Expanded(child: ReusbaleClass()),
