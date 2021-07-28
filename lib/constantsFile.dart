@@ -15,3 +15,6 @@ const TextStyle kbiglableDesign=TextStyle(
     fontWeight: FontWeight.w900
 );
 
+const TextStyle klablemediumDesign=TextStyle(
+    fontSize: 30,
+);
